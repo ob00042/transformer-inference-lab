@@ -29,3 +29,12 @@ select = ["E", "F", "I", "B", "UP"]
 testpaths = ["tests"]
 markers = ["integration: downloads and executes the public benchmark model"]
 addopts = "-m 'not integration'"
+
+# Keep Linux CI and Docker CPU-only; macOS uses the standard wheel with MPS.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]

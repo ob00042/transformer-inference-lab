@@ -1,0 +1,29 @@
+name: checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: ubuntu-latest
+    env:
+      HF_HOME: ${{ github.workspace }}/.cache/huggingface
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          version: "0.11.6"
+          python-version: '3.11'
+      - run: uv sync --frozen --extra dev
+      - run: uv run ruff check src tests scripts
+      - run: uv run ruff format --check src tests scripts
+      - run: uv run pytest -q
+      - uses: actions/cache@v4
+        with:
+          path: .cache/huggingface
+          key: hf-tiny-random-gpt2-71034c5d8bde858ff824298bdedc65515b97d2b9
+      - name: Real CPU model-loading and inference smoke test
+        run: uv run pytest -q -m integration
+        env:
+          INFERENCE_LAB_TEST_MODEL: hf-internal-testing/tiny-random-gpt2
+          INFERENCE_LAB_TEST_REVISION: 71034c5d8bde858ff824298bdedc65515b97d2b9

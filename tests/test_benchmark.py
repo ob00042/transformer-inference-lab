@@ -86,3 +86,54 @@ def test_cli_json(tiny_snapshot, tmp_path, monkeypatch):
     assert data["schema_version"] == 1
     assert data["environment"]["python"]
     assert data["results"][0]["status"] == "ok"
+
+
+def test_correctness_mismatch_is_rejected(tiny_snapshot, monkeypatch):
+    from inference_lab import benchmark
+
+    original = benchmark.generate
+
+    def inconsistent(model, tokenizer, inputs, max_new_tokens, **kwargs):
+        output = original(model, tokenizer, inputs, max_new_tokens, **kwargs).clone()
+        if output.shape[0] > 1:
+            output[1, -1] = (output[1, -1] + 1) % model.config.vocab_size
+        return output
+
+    monkeypatch.setattr(benchmark, "generate", inconsistent)
+    with pytest.raises(ValueError, match="Batch/single"):
+        run(
+            Config(
+                model=str(tiny_snapshot),
+                batch_size=4,
+                prompt_length=8,
+                max_new_tokens=2,
+                warmups=1,
+                repetitions=1,
+            )
+        )
+
+
+def test_cli_error_is_saved_and_fails(tiny_snapshot, tmp_path, monkeypatch):
+    output = tmp_path / "error.json"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "inference-lab",
+            "benchmark",
+            "--model",
+            str(tiny_snapshot),
+            "--prompt-length",
+            "128",
+            "--max-new-tokens",
+            "2",
+            "--output",
+            str(output),
+        ],
+    )
+    with pytest.raises(SystemExit) as error:
+        main()
+    assert error.value.code == 1
+    result = json.loads(output.read_text())["results"][0]
+    assert result["status"] == "error"
+    assert "context limit" in result["reason"]
