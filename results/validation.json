@@ -1,0 +1,480 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-19T09:28:44.460773+00:00",
+  "environment": {
+    "python": "3.11.15",
+    "pytorch": "2.14.0",
+    "transformers": "4.57.6",
+    "os": "macOS-26.3.1-arm64-arm-64bit",
+    "cpu": "Apple M4 Pro",
+    "logical_cpus": 14,
+    "ram_bytes": 25769803776,
+    "cuda_available": false,
+    "cuda_version": null,
+    "cuda_device": null,
+    "cuda_vram_bytes": null,
+    "mps_available": true
+  },
+  "methodology": {
+    "generation": "greedy; KV cache; eager attention; fixed output via min_new_tokens",
+    "latency": "pretokenized device inputs through synchronized full batch generation",
+    "ttft": "separate full generation runs; first generated batch token at host streamer",
+    "excluded": "download, model load, tokenization, input transfer, output text decoding",
+    "p95": "linear interpolation; only reported for at least 20 repetitions",
+    "memory": "CUDA allocated peak includes model; RSS/MPS snapshots are not peaks"
+  },
+  "results": [
+    {
+      "config": {
+        "model": "HuggingFaceTB/SmolLM2-135M",
+        "revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+        "device": "mps",
+        "dtype": "float32",
+        "batch_size": 1,
+        "prompt_length": 256,
+        "max_new_tokens": 16,
+        "warmups": 5,
+        "repetitions": 20,
+        "threads": 4,
+        "seed": 42
+      },
+      "status": "ok",
+      "resolved_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "model_load_seconds": 0.9052747501991689,
+      "prompt_tokens_per_item": 256,
+      "total_prompt_tokens": 256,
+      "generated_tokens_per_item": 16,
+      "total_generated_tokens": 16,
+      "latency_seconds": {
+        "median": 0.29886489594355226,
+        "p95": 0.32149883089587095
+      },
+      "latency_samples_seconds": [
+        0.28361700009554625,
+        0.3211629996076226,
+        0.31325633311644197,
+        0.2816490000113845,
+        0.2830770001746714,
+        0.28444029204547405,
+        0.2994362087920308,
+        0.2829955411143601,
+        0.29950824985280633,
+        0.2992804585956037,
+        0.28399295825511217,
+        0.2838299577124417,
+        0.2989506251178682,
+        0.3000948750413954,
+        0.2987791667692363,
+        0.28370399959385395,
+        0.2840489582158625,
+        0.31743487482890487,
+        0.3162555838935077,
+        0.32787962537258863
+      ],
+      "ttft_seconds": {
+        "median": 0.047839000122621655,
+        "p95": 0.0572418699041009
+      },
+      "ttft_samples_seconds": [
+        0.051444499753415585,
+        0.050767041742801666,
+        0.04261612519621849,
+        0.05538487480953336,
+        0.04277704190462828,
+        0.03412970807403326,
+        0.036653084214776754,
+        0.06377462483942509,
+        0.04370079189538956,
+        0.04451470822095871,
+        0.05527233285829425,
+        0.05108266696333885,
+        0.04863941669464111,
+        0.041325916070491076,
+        0.04384254198521376,
+        0.05689804069697857,
+        0.04805016703903675,
+        0.04751337459310889,
+        0.055250249803066254,
+        0.04762783320620656
+      ],
+      "generated_tokens_per_second": {
+        "median": 53.535900447612484,
+        "p95": 56.55150845245175
+      },
+      "requests_per_second": {
+        "median": 3.3459937779757802,
+        "p95": 3.5344692782782343
+      },
+      "per_sequence_tokens_per_second": {
+        "median": 53.535900447612484,
+        "p95": 56.55150845245175
+      },
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_samples_bytes": [],
+      "process_rss_after_run_bytes": 723025920,
+      "mps_allocated_after_run_bytes": 539052032,
+      "greedy_token_ids_first_item": [
+        28,
+        34349,
+        28,
+        284,
+        12141,
+        35685,
+        30,
+        216,
+        9026,
+        2095,
+        4665,
+        3736,
+        638,
+        253,
+        1789,
+        1743
+      ],
+      "prompt_sha256": "c6093896d209fc184e10c72e517ca253462a370001e2e096a4a30a02df175835",
+      "correctness": {
+        "batch_matches_single": true,
+        "repetitions_match": true
+      }
+    },
+    {
+      "config": {
+        "model": "HuggingFaceTB/SmolLM2-135M",
+        "revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+        "device": "mps",
+        "dtype": "float32",
+        "batch_size": 1,
+        "prompt_length": 64,
+        "max_new_tokens": 16,
+        "warmups": 5,
+        "repetitions": 20,
+        "threads": 4,
+        "seed": 42
+      },
+      "status": "ok",
+      "resolved_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "model_load_seconds": 0.23947245813906193,
+      "prompt_tokens_per_item": 64,
+      "total_prompt_tokens": 64,
+      "generated_tokens_per_item": 16,
+      "total_generated_tokens": 16,
+      "latency_seconds": {
+        "median": 0.4207494789734483,
+        "p95": 0.4680567441741005
+      },
+      "latency_samples_seconds": [
+        0.4679124588146806,
+        0.4076337078586221,
+        0.4274014583788812,
+        0.4666720419190824,
+        0.46067420905455947,
+        0.3190465001389384,
+        0.44774316623806953,
+        0.40065816696733236,
+        0.4186528748832643,
+        0.4340622089803219,
+        0.38690741593018174,
+        0.462117999792099,
+        0.44729954237118363,
+        0.3999374583363533,
+        0.42284608306363225,
+        0.3763117082417011,
+        0.374484040774405,
+        0.3833692083135247,
+        0.39825412491336465,
+        0.4707981660030782
+      ],
+      "ttft_seconds": {
+        "median": 0.03617270779795945,
+        "p95": 0.044145085383206606
+      },
+      "ttft_samples_seconds": [
+        0.04777095885947347,
+        0.03910166583955288,
+        0.03482550010085106,
+        0.03331466717645526,
+        0.02339991694316268,
+        0.03849683282896876,
+        0.040095541160553694,
+        0.04132725019007921,
+        0.03552158270031214,
+        0.03417908400297165,
+        0.03831116622313857,
+        0.03491391707211733,
+        0.033759250305593014,
+        0.036823832895606756,
+        0.02847608318552375,
+        0.04217016603797674,
+        0.039635416120290756,
+        0.02943124994635582,
+        0.0439542499370873,
+        0.03339383332058787
+      ],
+      "generated_tokens_per_second": {
+        "median": 38.02832349811437,
+        "p95": 43.09665111151131
+      },
+      "requests_per_second": {
+        "median": 2.376770218632148,
+        "p95": 2.6935406944694567
+      },
+      "per_sequence_tokens_per_second": {
+        "median": 38.02832349811437,
+        "p95": 43.09665111151131
+      },
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_samples_bytes": [],
+      "process_rss_after_run_bytes": 255770624,
+      "mps_allocated_after_run_bytes": 539045888,
+      "greedy_token_ids_first_item": [
+        28,
+        34349,
+        28,
+        284,
+        12141,
+        35685,
+        30,
+        198,
+        198,
+        504,
+        808,
+        827,
+        3736,
+        359,
+        1552,
+        335
+      ],
+      "prompt_sha256": "55adfea97853f2cd6c296406aae23b92c95e932ce4e0a6a5eda80d297e03723f",
+      "correctness": {
+        "batch_matches_single": true,
+        "repetitions_match": true
+      }
+    },
+    {
+      "config": {
+        "model": "HuggingFaceTB/SmolLM2-135M",
+        "revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+        "device": "mps",
+        "dtype": "float32",
+        "batch_size": 1,
+        "prompt_length": 256,
+        "max_new_tokens": 16,
+        "warmups": 5,
+        "repetitions": 20,
+        "threads": 4,
+        "seed": 42
+      },
+      "status": "ok",
+      "resolved_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "model_load_seconds": 0.4322069580666721,
+      "prompt_tokens_per_item": 256,
+      "total_prompt_tokens": 256,
+      "generated_tokens_per_item": 16,
+      "total_generated_tokens": 16,
+      "latency_seconds": {
+        "median": 0.3033249790314585,
+        "p95": 0.39046523692086343
+      },
+      "latency_samples_seconds": [
+        0.3072164999321103,
+        0.3789375410415232,
+        0.37936216685920954,
+        0.2994334581308067,
+        0.359806208871305,
+        0.3854284160770476,
+        0.33638104191049933,
+        0.2816902082413435,
+        0.2841441249474883,
+        0.3147925832308829,
+        0.3519717501476407,
+        0.2986380411311984,
+        0.28489716723561287,
+        0.282108583021909,
+        0.48616483295336366,
+        0.3460166249424219,
+        0.2838335828855634,
+        0.28254920803010464,
+        0.28373562498018146,
+        0.2988995839841664
+      ],
+      "ttft_seconds": {
+        "median": 0.04598204139620066,
+        "p95": 0.07026306458283216
+      },
+      "ttft_samples_seconds": [
+        0.043537791818380356,
+        0.05056258291006088,
+        0.041332333348691463,
+        0.04641837486997247,
+        0.05933241592720151,
+        0.04857683274894953,
+        0.038751957938075066,
+        0.03945362474769354,
+        0.045545707922428846,
+        0.07004412496462464,
+        0.04049224965274334,
+        0.03925525024533272,
+        0.04306129179894924,
+        0.056418417021632195,
+        0.04695137497037649,
+        0.043812249787151814,
+        0.047820250038057566,
+        0.04048837488517165,
+        0.046768249943852425,
+        0.07442291732877493
+      ],
+      "generated_tokens_per_second": {
+        "median": 52.75738925120919,
+        "p95": 56.71996226662075
+      },
+      "requests_per_second": {
+        "median": 3.2973368282005744,
+        "p95": 3.5449976416637967
+      },
+      "per_sequence_tokens_per_second": {
+        "median": 52.75738925120919,
+        "p95": 56.71996226662075
+      },
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_samples_bytes": [],
+      "process_rss_after_run_bytes": 315768832,
+      "mps_allocated_after_run_bytes": 539052032,
+      "greedy_token_ids_first_item": [
+        28,
+        34349,
+        28,
+        284,
+        12141,
+        35685,
+        30,
+        216,
+        9026,
+        2095,
+        4665,
+        3736,
+        638,
+        253,
+        1789,
+        1743
+      ],
+      "prompt_sha256": "c6093896d209fc184e10c72e517ca253462a370001e2e096a4a30a02df175835",
+      "correctness": {
+        "batch_matches_single": true,
+        "repetitions_match": true
+      }
+    },
+    {
+      "config": {
+        "model": "HuggingFaceTB/SmolLM2-135M",
+        "revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+        "device": "mps",
+        "dtype": "float32",
+        "batch_size": 1,
+        "prompt_length": 64,
+        "max_new_tokens": 16,
+        "warmups": 5,
+        "repetitions": 20,
+        "threads": 4,
+        "seed": 42
+      },
+      "status": "ok",
+      "resolved_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "model_load_seconds": 0.6529533746652305,
+      "prompt_tokens_per_item": 64,
+      "total_prompt_tokens": 64,
+      "generated_tokens_per_item": 16,
+      "total_generated_tokens": 16,
+      "latency_seconds": {
+        "median": 0.3551734792999923,
+        "p95": 0.433280783565715
+      },
+      "latency_samples_seconds": [
+        0.3891504160128534,
+        0.3143805842846632,
+        0.38104149978607893,
+        0.3105907500721514,
+        0.4360696659423411,
+        0.31904145888984203,
+        0.4239634582772851,
+        0.31706158397719264,
+        0.29127837531268597,
+        0.39762408286333084,
+        0.42297920817509294,
+        0.43313400028273463,
+        0.29556366708129644,
+        0.2677487921901047,
+        0.38983958307653666,
+        0.41027424996718764,
+        0.3309055417776108,
+        0.3124834159389138,
+        0.37944141682237387,
+        0.2910102503374219
+      ],
+      "ttft_seconds": {
+        "median": 0.03792497934773564,
+        "p95": 0.04626925613265485
+      },
+      "ttft_samples_seconds": [
+        0.029920542147010565,
+        0.023301541805267334,
+        0.04167904192581773,
+        0.02182941697537899,
+        0.04621024988591671,
+        0.03979608416557312,
+        0.03691262472420931,
+        0.04449295811355114,
+        0.0448101251386106,
+        0.0384362917393446,
+        0.019282417371869087,
+        0.047390374820679426,
+        0.04221866698935628,
+        0.04211662523448467,
+        0.03776191687211394,
+        0.03580166632309556,
+        0.03055749973282218,
+        0.03159475000575185,
+        0.038088041823357344,
+        0.03496420895680785
+      ],
+      "generated_tokens_per_second": {
+        "median": 45.25970704616441,
+        "p95": 55.21971242375709
+      },
+      "requests_per_second": {
+        "median": 2.8287316903852755,
+        "p95": 3.451232026484818
+      },
+      "per_sequence_tokens_per_second": {
+        "median": 45.25970704616441,
+        "p95": 55.21971242375709
+      },
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_samples_bytes": [],
+      "process_rss_after_run_bytes": 240435200,
+      "mps_allocated_after_run_bytes": 539045888,
+      "greedy_token_ids_first_item": [
+        28,
+        34349,
+        28,
+        284,
+        12141,
+        35685,
+        30,
+        198,
+        198,
+        504,
+        808,
+        827,
+        3736,
+        359,
+        1552,
+        335
+      ],
+      "prompt_sha256": "55adfea97853f2cd6c296406aae23b92c95e932ce4e0a6a5eda80d297e03723f",
+      "correctness": {
+        "batch_matches_single": true,
+        "repetitions_match": true
+      }
+    }
+  ]
+}
