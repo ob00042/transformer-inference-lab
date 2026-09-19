@@ -53,6 +53,21 @@ with reasons: unavailable CUDA and the explicit CPU-low-precision scope exclusio
 load times, memory observations, exact token counts, and output token IDs.
 All times below are milliseconds; throughput counts generated tokens across the batch.
 
+- **Device / dtype (experiment setting):** The execution backend (CPU or Apple's MPS GPU backend) and
+  floating-point precision used for the model.
+- **Batch (experiment setting):** The number of input sequences processed together in one request.
+- **Prompt (experiment setting):** The number of input tokens in each sequence, excluding generated tokens.
+- **Median latency (latency metric):** The median time to generate all output tokens for the entire batch.
+- **p95 latency (latency metric):** The estimated 95th percentile of batch completion time, showing the
+  slower end of the measured runs.
+- **Median TTFT (latency metric):** The median time to first token, measured when the first generated
+  token for each sequence in the batch reaches the host in separate instrumented runs.
+- **Tokens/s (throughput metric):** The median aggregate number of generated tokens per second across
+  the entire batch.
+
+Lower latency means faster responses; higher throughput means more tokens generated
+per second. Experiment settings define the workload and can affect both metrics.
+
 | Device / dtype | Batch | Prompt | Median latency | p95 latency | Median TTFT | Tokens/s |
 |---|---:|---:|---:|---:|---:|---:|
 | cpu / float32 | 1 | 64 | 231.1 | 251.0 | 34.5 | 69.2 |
