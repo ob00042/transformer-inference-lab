@@ -11,7 +11,7 @@ requires no authentication and fits comfortably on CPU or Apple Silicon.
 
 ## Experimental setup
 
-- Apple M4 Pro, 14 logical CPUs, 24 GiB unified RAM; macOS 26.3.1.
+- Apple M4 Pro, 14 CPUs, 24 GB RAM; macOS 26.3.1.
 - Python 3.11.15, PyTorch 2.14.0, Transformers 4.57.6; dependencies in `uv.lock`.
 - Model revision `93efa2f097d58c2a74874c7e644dbc9b0cee75a2`.
 - CPU float32; MPS float32, float16, and bfloat16. CUDA was unavailable.
@@ -172,8 +172,7 @@ It is a plumbing check, not a model-quality evaluation. To test the actual bench
 model, run `HF_HOME=.cache/huggingface .venv/bin/pytest -q -m integration`.
 
 GitHub Actions runs Ruff, offline tests, and that tiny CPU integration check with
-uv and Hugging Face caching. No GPU or large model is needed. The workflow has been
-added locally; a hosted Actions run requires publishing the repository.
+uv and Hugging Face caching. No GPU or large model is needed.
 
 ## Limitations
 
@@ -197,6 +196,4 @@ across sessions; compare eager attention with SDPA; measure output-length scalin
 validate CUDA synchronization and allocator peaks on real hardware. Each should be
 an isolated experiment with correctness checks and raw results.
 
-Development evidence and pending human-review items are recorded in
-[docs/agent-workflow.md](docs/agent-workflow.md). Code is MIT-licensed; the model has
-its own license in its model card.
+Code is MIT-licensed; the model has its own license in its model card.

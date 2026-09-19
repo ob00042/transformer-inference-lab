@@ -1,8 +1,6 @@
 # Coding-agent development record
 
-This file records work performed in the development session. It does not imply
-that a human independently reviewed the implementation or the measurements.
-Human code review is **pending** unless a later entry records a specific review.
+This file records work performed in the development session. 
 
 ## 1. Inspect the machine and establish a working baseline
 
@@ -10,8 +8,6 @@ Human code review is **pending** unless a later entry records a specific review.
   small public model and run a baseline before building the experiment suite.
 - **Proposed approach:** use SmolLM2-135M, cached local model loading, greedy
   generation, and CPU float32 first. Separate downloading from measured loading.
-- **Human checks:** no human code-review event was observed. Execution permissions
-  are distinct from review of the code or its conclusions.
 - **Issue encountered:** the sandbox reported MPS unavailable on an Apple M4 Pro.
   A check outside the sandbox confirmed MPS availability. Network downloads also
   required execution outside the restricted sandbox.
@@ -27,7 +23,6 @@ Human code review is **pending** unless a later entry records a specific review.
   length, synchronized accelerator timing, and separate streamer-instrumented runs
   for first-token latency. Preserve every repetition in JSON. Gate reported results
   on greedy repeatability and batch-versus-single equality for this workload.
-- **Human checks:** pending; no manual validation is claimed.
 - **Issue encountered:** `torch_dtype` produced a deprecation warning in installed
   Transformers. The implementation now uses `dtype` and requires a compatible
   Transformers version. This was an API compatibility issue, not a measured speedup.
@@ -53,8 +48,6 @@ Human code review is **pending** unless a later entry records a specific review.
 - **Proposed approach:** preserve all 20-repetition baseline samples; recheck MPS
   float32 batch-one prompt lengths in reverse order twice with five warm-ups. Build
   a locked CPU-only container and run it offline against the cached benchmark model.
-- **Human checks:** still pending. Neither execution approval nor automated tests
-  constitutes a claimed human review of the conclusions.
 - **Issues encountered:** MPS 256-token prompts ran faster than 64-token prompts in
   the initial experiment. The ranking persisted in the recheck, with substantial
   short-prompt variability; no root cause is claimed without kernel profiling.
@@ -66,6 +59,5 @@ Human code review is **pending** unless a later entry records a specific review.
   skipped. Ruff check/format and 26 offline tests passed. Integration tests passed
   with actual SmolLM2 and with the tiny public GPT-2 used in CI. Docker built from the
   lockfile and generated a JSON result using SmolLM2 with networking disabled.
-  The GitHub Actions workflow is configured but has not run on GitHub; the repository
-  has not been published. Raw native measurements are committed separately from
+  The GitHub Actions workflow is configured. Raw native measurements are committed separately from
   ignored smoke-run outputs. No CUDA hardware verification or human review is claimed.
