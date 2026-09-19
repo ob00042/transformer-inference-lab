@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.cache/
+dist/
+*.egg-info/
+.DS_Store
+results/*.json
+!results/baseline.json
+!results/validation.json

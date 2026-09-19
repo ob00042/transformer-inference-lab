@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "transformer-inference-lab"
+version = "0.1.0"
+description = "A reproducible case study in small-model inference engineering"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["torch>=2.6,<3", "transformers>=4.51,<5", "psutil>=6,<8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[project.scripts]
+inference-lab = "inference_lab.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/inference_lab"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: downloads and executes the public benchmark model"]
+addopts = "-m 'not integration'"
