@@ -23,8 +23,14 @@ class Config:
     seed: int = 42
 
     def __post_init__(self) -> None:
-        for name in ("batch_size", "prompt_length", "max_new_tokens", "warmups",
-                     "repetitions", "threads"):
+        for name in (
+            "batch_size",
+            "prompt_length",
+            "max_new_tokens",
+            "warmups",
+            "repetitions",
+            "threads",
+        ):
             if getattr(self, name) < 1:
                 raise ValueError(f"{name} must be positive")
         if self.device not in ("cpu", "cuda", "mps"):
